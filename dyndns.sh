@@ -1,5 +1,8 @@
 # Dynamic DNS
 #
+# Specific for Dreamhost
+# Setup your API key here: https://panel.dreamhost.com/?tree=home.api
+# Must have all DNS privs
 
 # Config
 dh_api_key=YOUR_KEY
