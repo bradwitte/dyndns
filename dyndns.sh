@@ -9,6 +9,7 @@ dh_api_key=YOUR_KEY
 domain="dyndns.example.com"
 do_ipv4=true
 do_ipv6=true
+ip_echo_service="http://bot.whatismyipaddress.com/"
 
 ## No config below here
 
@@ -17,7 +18,7 @@ normalize_ipv6() {
 }
 
 get_ip() {
-    curl -"$1" -s "http://bot.whatismyipaddress.com/"
+    curl -"$1" -s "$ip_echo_service"
 }
 
 add_dns() {
