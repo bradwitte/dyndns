@@ -30,18 +30,13 @@ update_dns() {
     add_dns $1 $3
 }
 
-dyn_dns() {
-    if [ "$1" == "4" ]; then type="A"; else type="AAAA"; fi
-    echo "Checking $type record for $domain"
-    old_ip=$(echo "$dns_records" | grep $domain | grep "\s$type\s"| cut -f 5)
-    new_ip=$(get_ip "$1")
-
+process_new_ip() {
     if [ "$old_ip" == "" ]; then
         echo "No $type record found, creating one pointing to $new_ip..."
         add_dns $type $new_ip
         old_ip=$new_ip
     else
-        if [ "$1" == "4" ]; then
+        if [ "$type" == "A" ]; then
             old_ip_comp="$old_ip"
             new_ip_comp="$new_ip"
         else
@@ -58,6 +53,20 @@ dyn_dns() {
             update_dns $type $old_ip $new_ip
         fi
     fi
+}
+
+dyn_dns() {
+    if [ "$1" == "4" ]; then type="A"; else type="AAAA"; fi
+    echo "Checking $type record for $domain"
+    old_ip=$(echo "$dns_records" | grep $domain | grep "\s$type\s"| cut -f 5)
+    new_ip=$(get_ip "$1")
+
+    if [ "$new_ip" == "" ]; then
+        process_new_ip
+    else
+        echo "Problem getting new ipv$1 ip, leaving things as they are..."
+    fi
+
 }
 
 dh_url="https://api.dreamhost.com/?key=$dh_api_key"
