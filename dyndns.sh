@@ -57,7 +57,7 @@ process_new_ip() {
 
 dyn_dns() {
     if [ "$1" == "4" ]; then type="A"; else type="AAAA"; fi
-    echo "Checking $type record for $domain"
+    echo "$(date) Checking $type record for $domain"
     old_ip=$(echo "$dns_records" | grep $domain | grep "\s$type\s"| cut -f 5)
     new_ip=$(get_ip "$1")
 
