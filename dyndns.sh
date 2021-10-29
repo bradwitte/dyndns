@@ -62,9 +62,9 @@ dyn_dns() {
     new_ip=$(get_ip "$1")
 
     if [ "$new_ip" == "" ]; then
-        process_new_ip
-    else
         echo "Problem getting new ipv$1 ip, leaving things as they are..."
+    else
+        process_new_ip
     fi
 
 }
