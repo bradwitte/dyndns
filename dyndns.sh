@@ -1,3 +1,5 @@
+#!/bin/bash
+#
 # Dynamic DNS
 #
 # Specific for Dreamhost
