@@ -1,4 +1,4 @@
-<?
+<?php
 function getUserIpAddr(){
     if(!empty($_SERVER['HTTP_CLIENT_IP'])){
         //ip from share internet
